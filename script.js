@@ -58,7 +58,6 @@ const data = [
 
 data.forEach(createBox);
 
-// Create speech boxes
 function createBox(item) {
   const box = document.createElement("div");
   const { image, text } = item;
@@ -78,10 +77,8 @@ function createBox(item) {
   main.appendChild(box);
 }
 
-//Initialize Speech Synth
 const message = new SpeechSynthesisUtterance();
 
-//Store Voices
 let voices = [];
 
 function getVoices() {
@@ -94,38 +91,30 @@ function getVoices() {
   });
 }
 
-//Set Text
 function setTextMessage(text) {
   message.text = text;
 }
 
-//Speak Text
 function speakText() {
   speechSynthesis.speak(message);
 }
 
-//Voices Changed
 speechSynthesis.addEventListener("voiceschanged", getVoices);
 
-//Set Voice
 function setVoice(event) {
   message.voice = voices.find((voice) => voice.name === event.target.value);
 }
 
-//Toggle Text Box
 toggleBtn.addEventListener("click", () =>
   document.getElementById("text-box").classList.toggle("show")
 );
 
-//Close Button
 closeBtn.addEventListener("click", () =>
   document.getElementById("text-box").classList.remove("show")
 );
 
-//Change Voice
 voicesSelect.addEventListener("change", setVoice);
 
-//Read Text Button
 readBtn.addEventListener('click', () => {
   setTextMessage(textarea.value);
   speakText();
